@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "551182297271",
+    "firebase_url": "https://ecommerce-25646-default-rtdb.firebaseio.com",
+    "project_id": "ecommerce-25646",
+    "storage_bucket": "ecommerce-25646.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:551182297271:android:70c1d84eda4c6e6a63c532",
+        "android_client_info": {
+          "package_name": "com.example.greentea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "551182297271-prbbjqb8r9clpdagbt5o86hhfgn0f10r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.greentea",
+            "certificate_hash": "f15aefaf37318b6b049eee8097bed4ae1fc7d1e1"
+          }
+        },
+        {
+          "client_id": "551182297271-pt7ghteabtiepauc32heusg00djb8irb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa6h4HAC5GckNJ085SjiQvzrQd3DDw0Ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "551182297271-pt7ghteabtiepauc32heusg00djb8irb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

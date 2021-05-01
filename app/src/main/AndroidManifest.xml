@@ -33,7 +33,7 @@
         <activity android:name=".Buyers.ProductDetailsActivity" />
         <activity android:name=".Buyers.SettingActivity" />-->
 
-        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".WelcomActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

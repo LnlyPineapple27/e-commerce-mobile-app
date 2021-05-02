@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="img_seller" type="id" />
+    <item name="title_seller" type="id" />
+    <item name="seller_login_email" type="id" />
+    <item name="seller_login_password" type="id" />
+    <item name="seller_login_btn" type="id" />
+    <item name="seller_forget_password" type="id" />
+    <item name="back_to_home_seller_login" type="id" />
+    <item name="seller_not_have_account_btn" type="id" />
+</resources>

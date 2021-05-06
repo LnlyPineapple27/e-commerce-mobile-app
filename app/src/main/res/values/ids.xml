@@ -8,4 +8,15 @@
     <item name="seller_forget_password" type="id" />
     <item name="back_to_home_seller_login" type="id" />
     <item name="seller_not_have_account_btn" type="id" />
+    <item name="re11" type="id" />
+    <item name="seller_home_recyclerview" type="id" />
+    <item name="nav_view" type="id" />
+    <item name="seller_password" type="id" />
+    <item name="seller_email" type="id" />
+    <item name="seller_phone" type="id" />
+    <item name="seller_name" type="id" />
+    <item name="seller_address" type="id" />
+    <item name="seller_register_btn" type="id" />
+    <item name="back_to_home_seller_registration" type="id" />
+    <item name="seller_already_have_account_btn" type="id" />
 </resources>

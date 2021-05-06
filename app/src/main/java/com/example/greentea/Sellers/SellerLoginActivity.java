@@ -43,7 +43,12 @@ public class SellerLoginActivity extends AppCompatActivity {
             }
         });
         forgetPasswordSeller = findViewById(R.id.seller_forget_password);
-        
+        forgetPasswordSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SellerLoginActivity.this, SellerForgetPasswordActivity.class));
+            }
+        });
         back_to_home_seller_login = findViewById(R.id.back_to_home_seller_login);
         back_to_home_seller_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +57,12 @@ public class SellerLoginActivity extends AppCompatActivity {
             }
         });
         seller_not_have_account_btn = findViewById(R.id.seller_not_have_account_btn);
-
+        seller_not_have_account_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SellerLoginActivity.this, SellerRegistrationActivity.class));
+            }
+        });
     }
 
     private void loginSeller(){
@@ -68,6 +78,9 @@ public class SellerLoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         if(mAuth.getCurrentUser().isEmailVerified()){
+                            Intent intent = new Intent(SellerLoginActivity.this, SellerHomeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
                             finish();
                         }
                         else{

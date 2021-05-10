@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Buyers.ProductDetailsActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/nav_act_product_details"
+            layout="@layout/nav_actionbar_product_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"/>
+
+        <ImageView
+            android:id="@+id/product_image_details"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/nav_act_product_details"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/product_name_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_image_details"
+            android:text="Product Name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/product_description_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_name_details"
+            android:text="Product Description"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/product_price_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_description_details"
+            android:text="Product Price"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+
+        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+            android:id="@+id/number_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            app:textSize="16sp"
+            app:initialNumber="1"
+            app:finalNumber="10"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/product_price_details"
+            android:layout_marginTop="10dp">
+        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rate_product_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/number_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Rate this product"
+            android:textAllCaps="false"/>
+
+        <RatingBar
+            android:id="@+id/update_rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:layout_below="@id/rate_product_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:isIndicator="true"/>
+
+        <Button
+            android:id="@+id/pd_add_to_cart_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_500"
+            android:layout_margin="15dp"
+            android:layout_below="@id/bottom_sheet_comment_system"
+            android:text="Add to cart"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <include
+            android:id="@+id/bottom_sheet_comment_system"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/bottom_sheet_comment_fragment"
+            android:layout_below="@id/update_rating_bar"/>
+    </RelativeLayout>
+</ScrollView>

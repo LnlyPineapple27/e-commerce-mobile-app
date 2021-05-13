@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Buyers.JoinForm"
+    android:background="@drawable/poster_join">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/main_login_btn"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_button"
+        android:padding="10dp"
+        android:layout_marginVertical="150dp"
+        android:textAllCaps="false"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        android:text="Login"
+        android:textSize="23dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/main_join_now_btn"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_button"
+        android:padding="10dp"
+        android:layout_marginVertical="150dp"
+        android:textAllCaps="false"
+        android:layout_marginRight="20dp"
+        android:text="Join Now"
+        android:textSize="23dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/seller_begin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Want to become a seller?"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>

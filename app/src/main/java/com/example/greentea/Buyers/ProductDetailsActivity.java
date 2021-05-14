@@ -38,8 +38,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,8 +58,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     //check product is favourite or not
     private Toolbar toolbar;
     private boolean isFavouriteProduct = false;
-    //show product sales
-    private TextView productSales;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +185,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     if(ds.child(productID).child("dateComment").exists() || ds.child(productID).child("review").exists()
-                    || ds.child(productID).child("reviewer").exists() || ds.child(productID).child("rating").exists()){
+                            || ds.child(productID).child("reviewer").exists() || ds.child(productID).child("rating").exists()){
                         String val1 = ds.child(productID).child("dateComment").getValue().toString();
                         String val2 = ds.child(productID).child("review").getValue().toString();
                         String val3 = ds.child(productID).child("reviewer").getValue().toString();
@@ -214,8 +210,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //show product sales
-        productSales = findViewById(R.id.product_sales_details);
     }
 
     @Override
@@ -304,85 +298,40 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void addingToCartList(){
-        //check max quantity of product before adding to cart
-        DatabaseReference checkQuantity = FirebaseDatabase.getInstance().getReference().child("Products");
-        checkQuantity.child(productID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    long total_cur_quantity = Long.parseLong(snapshot.child("quantity").getValue().toString());
-                    if(total_cur_quantity == 0){
-                        Toast.makeText(ProductDetailsActivity.this, "This product is out of stock", Toast.LENGTH_SHORT).show();
-                    }
-                    else if(total_cur_quantity > 0 && Long.parseLong(numberButton.getNumber()) > total_cur_quantity){
-                        Toast.makeText(ProductDetailsActivity.this, "Max quantity of this product is " + total_cur_quantity, Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        String saveCurrentTime, saveCurrentDate;
-                        Calendar calForDate = Calendar.getInstance();
-                        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-                        saveCurrentDate = currentDate.format(calForDate.getTime());
-                        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-                        saveCurrentTime = currentTime.format(calForDate.getTime());
-                        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
-                        final HashMap<String, Object> cartMap = new HashMap<>();
-                        cartMap.put("pid", productID);
-                        cartMap.put("pname", productName.getText().toString());
-                        cartMap.put("price", productPrice.getText().toString());
-                        cartMap.put("date", saveCurrentDate);
-                        cartMap.put("time", saveCurrentTime);
-                        cartMap.put("quantity", numberButton.getNumber());
-                        cartMap.put("discount", "");
-                        //show product sales
-                        cartMap.put("sales", productSales.getText().toString());
-                        //
-                        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Products").child(productID).updateChildren(cartMap)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Products").child(productID).updateChildren(cartMap)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if(task.isSuccessful()){
-                                                                Toast.makeText(ProductDetailsActivity.this, "Added to cart list", Toast.LENGTH_SHORT).show();
-                                                                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
-                                                                startActivity(intent);
-                                                                //decrease product quantity when buyer add to cart
-                                                                DatabaseReference decreaseQuantity = FirebaseDatabase.getInstance().getReference().child("Products");
-                                                                decreaseQuantity.child(productID).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                                                        if(snapshot.exists()){
-                                                                            long quantity_bought = Long.parseLong(numberButton.getNumber());
-                                                                            long cur_quantity = Long.parseLong(snapshot.child("quantity").getValue().toString());
-                                                                            String total_quantity = Long.toString(cur_quantity - quantity_bought);
-                                                                            decreaseQuantity.child(productID).child("quantity").setValue(total_quantity);
-                                                                        }
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                                                                    }
-                                                                });
-                                                                //
-                                                            }
-                                                        }
-                                                    });
+        String saveCurrentTime, saveCurrentDate;
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        saveCurrentTime = currentTime.format(calForDate.getTime());
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        final HashMap<String, Object> cartMap = new HashMap<>();
+        cartMap.put("pid", productID);
+        cartMap.put("pname", productName.getText().toString());
+        cartMap.put("price", productPrice.getText().toString());
+        cartMap.put("date", saveCurrentDate);
+        cartMap.put("time", saveCurrentTime);
+        cartMap.put("quantity", numberButton.getNumber());
+        cartMap.put("discount", "");
+        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Products").child(productID).updateChildren(cartMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Products").child(productID).updateChildren(cartMap)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(ProductDetailsActivity.this, "Added to cart list", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                        }
                     }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
+                });
     }
 
     private void getProductDetails(String productID) {
@@ -395,14 +344,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
-                    //calc product after sales
-                    if(products.getSales().equals("")){
-                        productSales.setText("No sales");
-                    }
-                    else{
-                        productSales.setText(String.valueOf((Integer.valueOf(products.getPrice()) * (100 - Integer.valueOf(products.getSales()))) / 100));
-                    }
-                    //
                     Picasso.get().load(products.getImage()).into(productImage);
                 }
             }

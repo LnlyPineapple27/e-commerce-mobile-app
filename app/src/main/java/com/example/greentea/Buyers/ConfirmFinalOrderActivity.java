@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -26,6 +27,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private EditText nameEditText, phoneEditText, addressEditText, cityEditText;
     private Button confirmOrderBtn;
     private String totalAmount = "";
+    //
+    String tmpResNameProduct = "";
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,12 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 Check();
             }
         });
+        //
+        ArrayList<String> tmpStoreProduct = (ArrayList<String>) getIntent().getSerializableExtra("totalListProduct");
+        for(int i = 0; i < tmpStoreProduct.size(); i++){
+            tmpResNameProduct += tmpStoreProduct.get(i) + ", ";
+        }
+        //
     }
 
     private void Check(){
@@ -99,6 +109,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("state", "not shipped");
         //
         ordersMap.put("current_phone_db", Prevalent.currentOnlineUser.getPhone());
+        ordersMap.put("listProducts", tmpResNameProduct.substring(0, tmpResNameProduct.length() - 2));
         //
         ordersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

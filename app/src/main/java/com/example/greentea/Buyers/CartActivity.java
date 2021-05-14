@@ -30,12 +30,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Button NextProcessBtn;
     private TextView txtTotalAmount, txtMsg1;
     private int overTotalPrice = 0;
+    //
+    ArrayList<String> tmpStoreNameProduct = new ArrayList<>();
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,9 @@ public class CartActivity extends AppCompatActivity {
                 else{
                     Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                     intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                    //
+                    intent.putExtra("totalListProduct", tmpStoreNameProduct);
+                    //
                     startActivity(intent);
                     finish();
                 }
@@ -96,6 +104,9 @@ public class CartActivity extends AppCompatActivity {
                 }
                 //int oneTypeProductPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
                 overTotalPrice += oneTypeProductPrice;
+                //
+                tmpStoreNameProduct.add(model.getPname());
+                //
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

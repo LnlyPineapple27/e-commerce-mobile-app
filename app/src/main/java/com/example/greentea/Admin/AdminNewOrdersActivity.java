@@ -67,6 +67,9 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                 holder.userTotalPrice.setText("Total Amount = $" + model.getTotalAmount());
                 holder.userDateTime.setText("Order at: " + model.getDate() + " " + model.getTime());
                 holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
+                //
+                holder.listProduct.setText("List products bought: " + model.getListProducts());
+                //
                 holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -95,6 +98,9 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                                     HashMap<String, Object> orderShippedMap = new HashMap<>();
                                     orderShippedMap.put("productName", model.getName());
                                     orderShippedMap.put("totalAmount", model.getTotalAmount());
+                                    //
+                                    orderShippedMap.put("listProductBuy", model.getListProducts());
+                                    //
                                     shipFinished.child(model.getPhone()).child(getAlphaNumericString(10))
                                             .updateChildren(orderShippedMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -130,6 +136,9 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder{
         public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress;
         public Button ShowOrdersBtn;
+        //
+        public TextView listProduct;
+        //
         public AdminOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
             userName = itemView.findViewById(R.id.order_user_name);
@@ -138,6 +147,9 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
             userDateTime = itemView.findViewById(R.id.order_date_time);
             userShippingAddress = itemView.findViewById(R.id.order_address_city);
             ShowOrdersBtn = itemView.findViewById(R.id.show_all_products_btn);
+            //
+            listProduct = itemView.findViewById(R.id.order_list_product);
+            //
         }
     }
 

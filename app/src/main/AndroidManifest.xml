@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyEcommerceApp"
         tools:replace="android:theme">
-        <activity android:name=".ViewOrderBuyerActivity"></activity>
+        <activity android:name=".MenuCategoryActivity"></activity>
+        <activity android:name=".NotifyCartEmptyActivity" />
+        <activity android:name=".ViewOrderBuyerActivity" />
         <activity android:name=".HistoryOrderActivity" />
         <activity android:name=".CategoryActivity2" />
         <activity android:name=".CategoryActivity1" />

@@ -16,7 +16,9 @@ import com.example.greentea.Admin.AdminMaintainProductsActivity;
 import com.example.greentea.CategoryActivity1;
 import com.example.greentea.CategoryActivity2;
 import com.example.greentea.HistoryOrderActivity;
+import com.example.greentea.MenuCategoryActivity;
 import com.example.greentea.Model.Products;
+import com.example.greentea.NotifyCartEmptyActivity;
 import com.example.greentea.Prevalent.Prevalent;
 import com.example.greentea.R;
 import com.example.greentea.SliderAdapter;
@@ -27,9 +29,12 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -38,6 +43,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -123,6 +129,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
+        /*
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +139,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(intent);
                 }
             }
-        });
+        });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -147,14 +154,33 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         }
         recyclerView = findViewById(R.id.recycler_menu);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         //slide view pager
         findViewById(R.id.add_to_cart_app_bar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, CartActivity.class));
+                //startActivity(new Intent(HomeActivity.this, CartActivity.class));
+                //
+                DatabaseReference checkStatusCart1 = FirebaseDatabase.getInstance().getReference().child("Cart List");
+                checkStatusCart1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        if(snapshot.child("User View").child(Prevalent.currentOnlineUser.getPhone()).exists()){
+                            startActivity(new Intent(HomeActivity.this, CartActivity.class));
+                        }
+                        else{
+                            startActivity(new Intent(HomeActivity.this, NotifyCartEmptyActivity.class));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+                //
             }
         });
         findViewById(R.id.notification_app_bar).setOnClickListener(new View.OnClickListener() {
@@ -251,6 +277,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(HomeActivity.this, "shoes", Toast.LENGTH_SHORT).show();
             }
         });
+        findViewById(R.id.more_category_txt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, MenuCategoryActivity.class));
+            }
+        });
     }
 
     //slide view pager
@@ -294,7 +326,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     holder.txtProductSales.setText("Product sales: " + (Integer.valueOf(model.getPrice()) * (100 - Integer.valueOf(model.getSales()))) / 100 + "$");
                 }
                 //
-                Picasso.get().load(model.getImage()).resize(1920, 1080).into(holder.imageView);
+                Picasso.get().load(model.getImage()).resize(400, 400).into(holder.imageView);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -356,8 +388,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if(id == R.id.nav_cart){
             if(!type.equals("Admin")){
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                //startActivity(intent);
+                //
+                DatabaseReference checkStatusCart = FirebaseDatabase.getInstance().getReference().child("Cart List");
+                checkStatusCart.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        if(snapshot.child("User View").child(Prevalent.currentOnlineUser.getPhone()).exists()){
+                            startActivity(new Intent(HomeActivity.this, CartActivity.class));
+                        }
+                        else{
+                            startActivity(new Intent(HomeActivity.this, NotifyCartEmptyActivity.class));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+                //
             }
         }
         else if(id == R.id.nav_search){
@@ -368,7 +419,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(id == R.id.nav_categories){
             //TODO
-            startActivity(new Intent(HomeActivity.this, ViewOrderBuyerActivity.class));
         }
         else if(id == R.id.nav_settings){
             if(!type.equals("Admin")){
@@ -378,6 +428,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         else if(id == R.id.nav_history){
             if(!type.equals("Admin")){
                 startActivity(new Intent(HomeActivity.this, HistoryOrderActivity.class));
+            }
+        }
+        else if(id == R.id.nav_view_all_orders){
+            if(!type.equals("Admin")){
+                startActivity(new Intent(HomeActivity.this, ViewOrderBuyerActivity.class));
             }
         }
         else if(id == R.id.nav_logout){

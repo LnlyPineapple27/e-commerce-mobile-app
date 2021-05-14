@@ -20,16 +20,17 @@ import java.util.ArrayList;
 
 public class viewOrderBuyerAdapter extends RecyclerView.Adapter<viewOrderBuyerAdapter.Viewholder>{
     private Context context;
-    private ArrayList viewOrderDate, viewOrderTime, viewOrderName, viewOrderPhone, viewOrderTotalAmount;
+    private ArrayList viewOrderDate, viewOrderTime, viewOrderName, viewOrderPhone, viewOrderTotalAmount, viewOrderListProducts;
 
     public viewOrderBuyerAdapter(Context context, ArrayList viewOrderDate, ArrayList viewOrderTime, ArrayList viewOrderName, ArrayList viewOrderPhone,
-    ArrayList viewOrderTotalAmount) {
+    ArrayList viewOrderTotalAmount, ArrayList viewOrderListProducts) {
         this.context = context;
         this.viewOrderDate = viewOrderDate;
         this.viewOrderTime = viewOrderTime;
         this.viewOrderName = viewOrderName;
         this.viewOrderPhone = viewOrderPhone;
         this.viewOrderTotalAmount = viewOrderTotalAmount;
+        this.viewOrderListProducts = viewOrderListProducts;
     }
 
     @Override
@@ -39,6 +40,7 @@ public class viewOrderBuyerAdapter extends RecyclerView.Adapter<viewOrderBuyerAd
         holder.viewName.setText(viewOrderName.get(position).toString());
         holder.viewPhone.setText(viewOrderPhone.get(position).toString());
         holder.viewTotalAmount.setText(viewOrderTotalAmount.get(position).toString());
+        holder.viewListProduct.setText(viewOrderListProducts.get(position).toString());
     }
 
     @NonNull
@@ -54,7 +56,7 @@ public class viewOrderBuyerAdapter extends RecyclerView.Adapter<viewOrderBuyerAd
     }
 
     public class Viewholder extends RecyclerView.ViewHolder{
-        private TextView viewDate, viewTime, viewName, viewPhone, viewTotalAmount;
+        private TextView viewDate, viewTime, viewName, viewPhone, viewTotalAmount, viewListProduct;
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
@@ -63,6 +65,7 @@ public class viewOrderBuyerAdapter extends RecyclerView.Adapter<viewOrderBuyerAd
             viewName = itemView.findViewById(R.id.view_order_name_txt);
             viewPhone = itemView.findViewById(R.id.view_order_phone_txt);
             viewTotalAmount = itemView.findViewById(R.id.view_order_total_amount_txt);
+            viewListProduct = itemView.findViewById(R.id.view_order_list_products_txt);
         }
     }
 }

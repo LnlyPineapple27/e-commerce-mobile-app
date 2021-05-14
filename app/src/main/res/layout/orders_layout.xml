@@ -63,6 +63,19 @@
             android:layout_below="@id/order_address_city"
             android:gravity="center"
             android:layout_marginTop="10dp"/>
+        <!---->
+        <TextView
+            android:id="@+id/order_list_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="List products"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_below="@id/order_date_time"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+        <!---->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/show_all_products_btn"
             android:layout_width="match_parent"
@@ -75,7 +88,7 @@
             android:textAllCaps="false"
             android:textSize="18sp"
             android:background="@color/white"
-            android:layout_below="@id/order_date_time"/>
+            android:layout_below="@id/order_list_product"/>
     </RelativeLayout>
 
 </RelativeLayout>

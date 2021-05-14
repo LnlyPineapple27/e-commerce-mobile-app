@@ -26,6 +26,7 @@ public class ViewOrderBuyerActivity extends AppCompatActivity {
     ArrayList<String> viewOrderName = new ArrayList<>();
     ArrayList<String> viewOrderPhone = new ArrayList<>();
     ArrayList<String> viewOrderTotalAmount = new ArrayList<>();
+    ArrayList<String> viewOrderListProducts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +44,18 @@ public class ViewOrderBuyerActivity extends AppCompatActivity {
                         String val3 = ds.child("name").getValue(String.class);
                         String val4 = ds.child("phone").getValue(String.class);
                         String val5 = ds.child("totalAmount").getValue(String.class);
+                        String val6 = ds.child("listProducts").getValue(String.class);
                         viewOrderDate.add(val1);
                         viewOrderTime.add(val2);
                         viewOrderName.add(val3);
                         viewOrderPhone.add(val4);
                         viewOrderTotalAmount.add(val5);
+                        viewOrderListProducts.add(val6);
                     }
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 viewOrderBuyerAdapter adapter = new viewOrderBuyerAdapter(ViewOrderBuyerActivity.this, viewOrderDate, viewOrderTime,
-                        viewOrderName, viewOrderPhone, viewOrderTotalAmount);
+                        viewOrderName, viewOrderPhone, viewOrderTotalAmount, viewOrderListProducts);
                 recyclerView.setAdapter(adapter);
             }
 

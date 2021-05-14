@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Ecommerce_app</string>
     <string name="title_home">Home</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_all_notifications">All</string>
+    <string name="title_discounts_notifications">Discounts</string>
+    <string name="title_orders_notifications">Your Orders</string>
 </resources>

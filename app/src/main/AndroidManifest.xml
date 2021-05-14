@@ -32,7 +32,7 @@
         <activity android:name=".Buyers.CartActivity" />
         <activity android:name=".Buyers.ProductDetailsActivity" />
         <activity android:name=".Buyers.SettingActivity" />-->
-
+        <activity android:name=".Buyers.NotificationsActivity"/>
         <activity android:name=".WelcomActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

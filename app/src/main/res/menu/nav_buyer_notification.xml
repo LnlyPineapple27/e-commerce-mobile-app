@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_all_notifications"
+        android:icon="@drawable/ic_all"
+        android:title="@string/title_all_notifications" />
+
+    <item
+        android:id="@+id/navigation_discounts_notifications"
+        android:icon="@drawable/ic_discounts"
+        android:title="@string/title_discounts_notifications" />
+
+    <item
+        android:id="@+id/navigation_orders_notifications"
+        android:icon="@drawable/ic_ordered"
+        android:title="@string/title_orders_notifications" />
+</menu>

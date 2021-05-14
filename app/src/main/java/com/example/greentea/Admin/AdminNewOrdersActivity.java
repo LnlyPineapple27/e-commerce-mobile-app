@@ -14,13 +14,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.greentea.Model.AdminOrders;
 import com.example.greentea.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 
 public class AdminNewOrdersActivity extends AppCompatActivity {
     private RecyclerView ordersList;
@@ -35,6 +42,18 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
         ordersList = findViewById(R.id.orders_list);
         ordersList.setLayoutManager(new LinearLayoutManager(this));
     }
+
+    //
+    private String getAlphaNumericString(int n) {
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+        StringBuilder sb = new StringBuilder(n);
+        for (int i = 0; i < n; i++) {
+            int index = (int)(AlphaNumericString.length() * Math.random());
+            sb.append(AlphaNumericString.charAt(index));
+        }
+        return sb.toString();
+    }
+    //
 
     @Override
     protected void onStart() {
@@ -71,6 +90,21 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                                 if(i == 0){
                                     String uID = getRef(position).getKey();
                                     RemoverOrder(uID);
+                                    //
+                                    DatabaseReference shipFinished = FirebaseDatabase.getInstance().getReference().child("All Orders Shipped");
+                                    HashMap<String, Object> orderShippedMap = new HashMap<>();
+                                    orderShippedMap.put("productName", model.getName());
+                                    orderShippedMap.put("totalAmount", model.getTotalAmount());
+                                    shipFinished.child(model.getPhone()).child(getAlphaNumericString(10))
+                                            .updateChildren(orderShippedMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(AdminNewOrdersActivity.this, "Ship product finish successfully!!!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                    //
                                 }
                                 else{
                                     finish();

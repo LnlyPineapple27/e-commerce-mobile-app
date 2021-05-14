@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyEcommerceApp"
         tools:replace="android:theme">
-        <!--<activity android:name=".Sellers.SellerForgetPasswordActivity"/>
+        <activity android:name=".ViewOrderBuyerActivity"></activity>
+        <activity android:name=".HistoryOrderActivity" />
+        <activity android:name=".CategoryActivity2" />
+        <activity android:name=".CategoryActivity1" />
+        <activity android:name=".Sellers.SellerForgetPasswordActivity" />
         <activity android:name=".Admin.AdminCheckNewProductsActivity" />
         <activity android:name=".Admin.AdminHomeActivity" />
         <activity
@@ -30,10 +34,20 @@
         <activity android:name=".Admin.AdminNewOrdersActivity" />
         <activity android:name=".Buyers.ConfirmFinalOrderActivity" />
         <activity android:name=".Buyers.CartActivity" />
-        <activity android:name=".Buyers.ProductDetailsActivity" />
-        <activity android:name=".Buyers.SettingActivity" />-->
-        <activity android:name=".Buyers.NotificationsActivity"/>
-        <activity android:name=".WelcomActivity" />
+        <activity
+            android:name=".Buyers.ProductDetailsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".Buyers.SettingActivity" />
+        <activity
+            android:name=".Buyers.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.MyEcommerceApp.NoActionBar" />
+        <activity android:name=".Sellers.SellerProductCategoryActivity" />
+        <activity android:name=".Sellers.SellerAddNewProductActivity" />
+        <activity android:name=".Buyers.RegisterActivity" />
+        <activity android:name=".Buyers.LoginActivity" />
+        <activity android:name=".Buyers.JoinForm" />
+        <activity android:name=".WelcomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +55,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- crop image -->
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
     </application>
 

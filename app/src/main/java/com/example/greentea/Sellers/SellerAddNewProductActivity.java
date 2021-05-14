@@ -47,6 +47,9 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
     private DatabaseReference ProductsRef, sellersRef;
     private ProgressDialog loadingBar;
     private String sName, sAddress, sPhone, sEmail, sID;
+    //quantity and sales
+    private EditText InputProductQuantity, InputProductSales;
+    private String Quantity, percentageSales;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,9 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
 
             }
         });
+        //quantity and sales
+        InputProductQuantity = findViewById(R.id.product_quantity);
+        InputProductSales = findViewById(R.id.product_sales);
     }
 
     private void OpenGallery(){
@@ -114,6 +120,9 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
+        //quantity and sales
+        Quantity = InputProductQuantity.getText().toString();
+        percentageSales = InputProductSales.getText().toString();
         if(ImageUri == null){
             Toast.makeText(this, "Product image is required", Toast.LENGTH_SHORT).show();
         }
@@ -125,6 +134,10 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         }
         else if(TextUtils.isEmpty(Pname)){
             Toast.makeText(this, "Please write product name", Toast.LENGTH_SHORT).show();
+        }
+        //quantity and sales
+        else if(TextUtils.isEmpty(Quantity)){
+            Toast.makeText(this, "Please write product quantity", Toast.LENGTH_SHORT).show();
         }
         else{
             StoreProductInformation();
@@ -195,6 +208,9 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         productMap.put("sellerEmail", sEmail);
         productMap.put("sid", sID);
         productMap.put("productState", "Not Approved");
+        //quantity and sales
+        productMap.put("quantity", Quantity);
+        productMap.put("Sales", percentageSales);
         ProductsRef.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

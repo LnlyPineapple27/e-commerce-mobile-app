@@ -1,5 +1,8 @@
 package com.example.greentea.Buyers;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,9 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.greentea.Prevalent.Prevalent;
 import com.example.greentea.R;
@@ -65,14 +65,29 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         }
     }
 
+    //
+    private String randomKeyOrder(int n) {
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+        StringBuilder sb = new StringBuilder(n);
+        for (int i = 0; i < n; i++) {
+            int index = (int)(AlphaNumericString.length() * Math.random());
+            sb.append(AlphaNumericString.charAt(index));
+        }
+        return sb.toString();
+    }
+    //
+
     private void ConfirmOrder(){
         final String saveCurrentDate, saveCurrentTime;
         Calendar calForDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         saveCurrentDate = currentDate.format(calForDate.getTime());
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentDate.format(calForDate.getTime());
-        final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+        saveCurrentTime = currentTime.format(calForDate.getTime());
+        //final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+        //
+        final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(randomKeyOrder(10));
+        //
         HashMap<String, Object> ordersMap = new HashMap<>();
         ordersMap.put("totalAmount", totalAmount);
         ordersMap.put("name", nameEditText.getText().toString());
@@ -82,6 +97,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("date", saveCurrentDate);
         ordersMap.put("time", saveCurrentTime);
         ordersMap.put("state", "not shipped");
+        //
+        ordersMap.put("current_phone_db", Prevalent.currentOnlineUser.getPhone());
+        //
         ordersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

@@ -1,5 +1,10 @@
 package com.example.greentea.Buyers;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,11 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.greentea.Model.Products;
 import com.example.greentea.R;
@@ -57,7 +57,7 @@ public class SearchProductsActivity extends AppCompatActivity {
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductDescription.setText(model.getDescription());
                 holder.txtProductPrice.setText("Price = " + model.getPrice() + "$");
-                Picasso.get().load(model.getImage()).into(holder.imageView);
+                Picasso.get().load(model.getImage()).resize(1920, 1080).into(holder.imageView);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -53,10 +53,22 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 txtTotalAmount.setText("Total Price = $" + String.valueOf(overTotalPrice));
+                //
+                if(String.valueOf(overTotalPrice).equals("0")){
+                    Toast.makeText(CartActivity.this, "Your cart is empty", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+                    intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                    startActivity(intent);
+                    finish();
+                }
+                //
+                /*
                 Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
                 startActivity(intent);
-                finish();
+                finish();*/
             }
         });
     }
@@ -64,10 +76,10 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        CheckOrderState();
+        //CheckOrderState();
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>().setQuery(cartListRef.child("User View")
-                .child(Prevalent.currentOnlineUser.getPhone()).child("Products"), Cart.class).build();
+        .child(Prevalent.currentOnlineUser.getPhone()).child("Products"), Cart.class).build();
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model) {
@@ -75,13 +87,20 @@ public class CartActivity extends AppCompatActivity {
                 holder.txtProductPrice.setText("Price " + model.getPrice() + "$");
                 holder.txtProductName.setText(model.getPname());
                 //calc total price
-                int oneTypeProductPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
+                int oneTypeProductPrice = 0;
+                if(model.getSales().equals("No sales")){
+                    oneTypeProductPrice = Integer.valueOf(model.getPrice()) * Integer.valueOf(model.getQuantity());
+                }
+                else{
+                    oneTypeProductPrice = Integer.valueOf(model.getSales()) * Integer.valueOf(model.getQuantity());
+                }
+                //int oneTypeProductPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
                 overTotalPrice += oneTypeProductPrice;
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         CharSequence options[] = new CharSequence[]{
-                                "Edit", "Remove"
+                            "Edit", "Remove"
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
                         builder.setTitle("Cart Options:");
@@ -139,14 +158,14 @@ public class CartActivity extends AppCompatActivity {
                         txtMsg1.setVisibility(View.VISIBLE);
                         txtMsg1.setText("Congratulations, your final order has been shipped successfully");
                         NextProcessBtn.setVisibility(View.GONE);
-                        Toast.makeText(CartActivity.this, "you can purchase more products, once your received your first final order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CartActivity.this, "You can purchase more products, once your received your first final order", Toast.LENGTH_SHORT).show();
                     }
                     else if(shippingState.equals("not shipped")){
                         txtTotalAmount.setText("Shipping State = Not Shipped");
                         recyclerView.setVisibility(View.GONE);
                         txtMsg1.setVisibility(View.VISIBLE);
                         NextProcessBtn.setVisibility(View.GONE);
-                        Toast.makeText(CartActivity.this, "you can purchase more products, once your received your first final order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CartActivity.this, "You can purchase more products, once your received your first final order", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

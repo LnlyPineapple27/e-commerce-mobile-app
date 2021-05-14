@@ -1,13 +1,13 @@
 package com.example.greentea.Model;
 
 public class Products {
-    private String pname, description, price, image, category, pid, date, time, productState;
+    private String pname, description, price, image, category, pid, date, time, productState, quantity, Sales;
 
     public Products(){
 
     }
 
-    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time, String productState) {
+    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time, String productState, String quantity, String Sales) {
         this.pname = pname;
         this.description = description;
         this.price = price;
@@ -17,6 +17,8 @@ public class Products {
         this.date = date;
         this.time = time;
         this.productState = productState;
+        this.quantity = quantity;
+        this.Sales = Sales;
     }
 
     public String getPname() {
@@ -89,5 +91,21 @@ public class Products {
 
     public void setProductState(String productState) {
         this.productState = productState;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getSales() {
+        return Sales;
+    }
+
+    public void setSales(String Sales) {
+        this.Sales = Sales;
     }
 }

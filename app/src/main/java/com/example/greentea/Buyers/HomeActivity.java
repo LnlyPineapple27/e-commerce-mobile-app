@@ -8,13 +8,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.greentea.Admin.AdminMaintainProductsActivity;
 import com.example.greentea.CategoryActivity1;
 import com.example.greentea.CategoryActivity2;
+import com.example.greentea.CategoryActivity3;
+import com.example.greentea.CategoryActivity4;
+import com.example.greentea.CategoryActivity5;
+import com.example.greentea.CategoryActivity6;
+import com.example.greentea.CategoryActivity7;
+import com.example.greentea.CategoryActivity8;
 import com.example.greentea.HistoryOrderActivity;
 import com.example.greentea.MenuCategoryActivity;
 import com.example.greentea.Model.Products;
@@ -27,13 +32,11 @@ import com.example.greentea.ViewHolder.ProductViewHolder;
 import com.example.greentea.ViewOrderBuyerActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -43,7 +46,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -244,43 +246,57 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.category_female_dresses).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "female dress", Toast.LENGTH_SHORT).show();
+                if(!type.equals("Admin")){
+                    startActivity(new Intent(HomeActivity.this, CategoryActivity3.class));
+                }
             }
         });
         findViewById(R.id.category_sweathers).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "sweather", Toast.LENGTH_SHORT).show();
+                if(!type.equals("Admin")){
+                    startActivity(new Intent(HomeActivity.this, CategoryActivity4.class));
+                }
             }
         });
         findViewById(R.id.category_glasses).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "glasses", Toast.LENGTH_SHORT).show();
+                if(!type.equals("Admin")){
+                    startActivity(new Intent(HomeActivity.this, CategoryActivity5.class));
+                }
             }
         });
         findViewById(R.id.category_purses_bags_wallets).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "bag wallet", Toast.LENGTH_SHORT).show();
+                if(!type.equals("Admin")){
+                    startActivity(new Intent(HomeActivity.this, CategoryActivity7.class));
+                }
             }
         });
         findViewById(R.id.category_hats_caps).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "hat caps", Toast.LENGTH_SHORT).show();
+                if(!type.equals("Admin")){
+                    startActivity(new Intent(HomeActivity.this, CategoryActivity6.class));
+                }
             }
         });
         findViewById(R.id.category_shoes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "shoes", Toast.LENGTH_SHORT).show();
+                if(!type.equals("Admin")){
+                    startActivity(new Intent(HomeActivity.this, CategoryActivity8.class));
+                }
             }
         });
         findViewById(R.id.more_category_txt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, MenuCategoryActivity.class));
+                if(!type.equals("Admin")){
+                    startActivity(new Intent(HomeActivity.this, MenuCategoryActivity.class));
+                }
             }
         });
     }
@@ -418,7 +434,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         else if(id == R.id.nav_categories){
-            //TODO
+            if(!type.equals("Admin")){
+                startActivity(new Intent(HomeActivity.this, MenuCategoryActivity.class));
+            }
         }
         else if(id == R.id.nav_settings){
             if(!type.equals("Admin")){

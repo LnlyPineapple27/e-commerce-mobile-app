@@ -13,11 +13,11 @@
         android:text="Welcome Admin"
         android:textAlignment="center"
         android:textSize="17sp"
-        android:textColor="@color/purple_500"
+        android:textColor="#2196F3"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/maintain_btn"
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -26,13 +26,13 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="25dp"
-        android:background="@color/purple_500"
+        android:background="#2196F3"
         android:text="Maintain Products"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textAllCaps="false"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/check_orders_btn"
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -40,13 +40,13 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/purple_500"
+        android:background="#2196F3"
         android:text="Check New Orders"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textAllCaps="false"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/check_approve_products_btn"
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -54,13 +54,13 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/purple_500"
+        android:background="#2196F3"
         android:text="Check and Approve New Products"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textAllCaps="false"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/admin_logout_btn"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -68,7 +68,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="15dp"
-        android:background="@color/purple_500"
+        android:background="#f00"
         android:text="Logout"
         android:textColor="@color/white"
         android:textSize="20sp"

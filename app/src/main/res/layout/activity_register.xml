@@ -202,7 +202,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/register_btn"
             android:gravity="center"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="10dp"
             android:textSize="15sp"
             android:textColor="@color/black"
             android:text="By registering, you are agreeing to the Green Tea Terms of Use and Privacy Policy"/>

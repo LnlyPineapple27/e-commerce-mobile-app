@@ -22,24 +22,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
-public class CategoryActivity2 extends AppCompatActivity {
+public class CategoryActivity3 extends AppCompatActivity {
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category2);
+        setContentView(R.layout.activity_category3);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Sport Tshirt");
-        recyclerView = findViewById(R.id.recycler_category2);
+        getSupportActionBar().setTitle("Female Dress");
+        recyclerView = findViewById(R.id.recycler_category3);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         DatabaseReference aa1 = FirebaseDatabase.getInstance().getReference("Products");
         Query query1 = aa1.orderByChild("productState").equalTo("Approved");
         DatabaseReference aa2 = query1.getRef();
-        Query query2 = aa2.orderByChild("category").equalTo("Sports tShirts");
+        Query query2 = aa2.orderByChild("category").equalTo("Female Dresses");
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query2, Products.class).build();
         FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
@@ -52,7 +52,7 @@ public class CategoryActivity2 extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(CategoryActivity2.this, ProductDetailsActivity.class);
+                        Intent intent = new Intent(CategoryActivity3.this, ProductDetailsActivity.class);
                         intent.putExtra("pid", model.getPid());
                         startActivity(intent);
                     }

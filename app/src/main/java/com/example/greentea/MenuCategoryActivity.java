@@ -48,79 +48,73 @@ public class MenuCategoryActivity extends AppCompatActivity {
         hero1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 1", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity1.class));
             }
         });
         hero2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 2", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity2.class));
             }
         });
         hero3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 3", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity3.class));
             }
         });
         hero4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 4", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity4.class));
             }
         });
         hero5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 5", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity5.class));
             }
         });
         hero6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 6", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity7.class));
             }
         });
         hero7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 7", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity6.class));
             }
         });
         hero8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 8", Toast.LENGTH_SHORT).show();
-            }
-        });
-        hero8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 8", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity8.class));
             }
         });
         hero9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 9", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity9.class));
             }
         });
         hero10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 10", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity10.class));
             }
         });
         hero11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 11", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity11.class));
             }
         });
         hero12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MenuCategoryActivity.this, "cate 12", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuCategoryActivity.this, CategoryActivity12.class));
             }
         });
     }
